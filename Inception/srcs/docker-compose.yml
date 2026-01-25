@@ -1,0 +1,69 @@
+services:
+  mysql:
+    build: ./requirements/mysql
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - app-network
+    container_name: "mysql"
+    env_file:
+      - ./.env
+    restart: on-failure
+
+  wordpress:
+    build: ./requirements/wordpress
+    volumes:
+      - wpdata:/var/www/html
+    networks:
+      - app-network
+    container_name: "wordpress"
+    depends_on:
+      - mysql
+    env_file:
+      - ./.env
+    restart: on-failure
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: "phpmyadmin"
+    restart: on-failure
+    environment:
+      PMA_HOST: mysql
+      PMA_ARBITRARY: 1
+      PMA_ABSOLUTE_URI: https://hnaciri.42.fr/phpmyadmin/ 
+    networks:
+      - app-network
+    depends_on:
+      - mysql
+
+  nginx:
+    build: ./requirements/nginx
+    ports:
+      - "443:443"
+    volumes:
+      - wpdata:/var/www/html
+    networks:
+      - app-network
+    depends_on:
+      - wordpress
+      - phpmyadmin
+    container_name: "nginx"
+    restart: on-failure
+
+volumes:
+  dbdata:
+    driver: local
+    driver_opts:
+      device: ~/data/mysql
+      type: "none"
+      o: bind
+  wpdata:
+    driver: local
+    driver_opts:
+      device: ~/data/wordpress
+      type: "none"
+      o: bind
+
+networks:
+  app-network:
+    driver: bridge

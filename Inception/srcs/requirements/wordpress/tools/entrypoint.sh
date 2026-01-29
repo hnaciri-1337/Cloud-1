@@ -27,7 +27,7 @@ if ! wp core is-installed --allow-root; then
 	echo "WordPress not installed, running wp core install..."
 
 	wp core install \
-		--url="https://${DOMAIN_NAME:-hnaciri.42.fr}" \
+		--url="https://${DOMAIN_NAME:-hnaciri-maamer.duckdns.org}" \
 		--title="${WP_TITLE:-Inception hnaciri website}" \
 		--admin_user="${WP_ADMIN_USER:-hnaciri}" \
 		--admin_password="${WP_ADMIN_PASSWORD:-hnaciri}" \

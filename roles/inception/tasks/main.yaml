@@ -1,8 +1,10 @@
 ---
 - name: Ensure 'make' is installed on the server
+  become: yes
   apt:
     name: make
     state: present
+    update_cache: yes
 
 - name: Copy Inception folder to the VM
   copy:
@@ -11,10 +13,22 @@
     owner: "{{ ansible_user }}"
     mode: '0755'
 
-- name: Generate .env file (Ansible manages your secrets)
+- name: Generate .env file
   template:
     src: .env.j2
     dest: "/home/{{ ansible_user }}/Inception/srcs/.env"
+
+- name: Create data directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'
+  loop:
+    - "/home/{{ ansible_user }}/data"
+    - "/home/{{ ansible_user }}/data/mysql"
+    - "/home/{{ ansible_user }}/data/wordpress"
 
 - name: Run the Inception Makefile
   community.general.make:

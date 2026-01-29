@@ -30,7 +30,7 @@ services:
     environment:
       PMA_HOST: mysql
       PMA_ARBITRARY: 1
-      PMA_ABSOLUTE_URI: https://hnaciri.42.fr/phpmyadmin/ 
+      PMA_ABSOLUTE_URI: https://hnaciri-maamer.duckdns.org/phpmyadmin/ 
     networks:
       - app-network
     depends_on:
@@ -54,13 +54,13 @@ volumes:
   dbdata:
     driver: local
     driver_opts:
-      device: ~/data/mysql
+      device: ${DATA_PATH}/mysql
       type: "none"
       o: bind
   wpdata:
     driver: local
     driver_opts:
-      device: ~/data/wordpress
+      device: ${DATA_PATH}/wordpress
       type: "none"
       o: bind
 

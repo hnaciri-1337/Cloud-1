@@ -2,6 +2,7 @@
 - name: Deploy Cloud-1 Infrastructure
   hosts: cloud_servers
   become: yes
+  gather_facts: yes
   roles:
     - common
     - docker

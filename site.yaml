@@ -1,0 +1,8 @@
+---
+- name: Deploy Cloud-1 Infrastructure
+  hosts: cloud_servers
+  become: yes
+  roles:
+    - common
+    - docker
+    - inception

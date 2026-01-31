@@ -2,7 +2,6 @@
 - name: Bootstrap Deployer User
   hosts: all
   remote_user: root
-  gather_facts: no  # Speed up execution, we don't need facts for this
 
   tasks:
     - name: Create 'deployer' user with bash shell and add to sudo group

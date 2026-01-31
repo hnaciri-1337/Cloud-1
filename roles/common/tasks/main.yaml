@@ -15,12 +15,6 @@
     rule: allow
     name: OpenSSH
 
-- name: Allow HTTP traffic
-  community.general.ufw:
-    rule: allow
-    port: '80'
-    proto: tcp
-
 - name: Allow HTTPS traffic
   community.general.ufw:
     rule: allow

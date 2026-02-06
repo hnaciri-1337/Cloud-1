@@ -7,3 +7,7 @@
     - common
     - docker
     - inception
+    - mysql
+    - wordpress
+    - pma
+    - nginx

@@ -1,11 +1,3 @@
----
-- name: Ensure 'make' is installed on the server
-  become: yes
-  apt:
-    name: make
-    state: present
-    update_cache: yes
-
 - name: Copy Inception folder to the VM
   copy:
     src: ./Inception
@@ -29,8 +21,3 @@
     - "/home/{{ ansible_user }}/data"
     - "/home/{{ ansible_user }}/data/mysql"
     - "/home/{{ ansible_user }}/data/wordpress"
-
-- name: Run the Inception Makefile
-  community.general.make:
-    chdir: "/home/{{ ansible_user }}/Inception"
-    target: all

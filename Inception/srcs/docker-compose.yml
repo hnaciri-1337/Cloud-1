@@ -40,6 +40,7 @@ services:
     build: ./requirements/nginx
     ports:
       - "443:443"
+      - "80:80"
     volumes:
       - wpdata:/var/www/html
     networks:

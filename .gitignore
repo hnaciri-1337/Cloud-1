@@ -1,5 +1,6 @@
 # Vagrant local data
 .vagrant/
+Vagrantfile
 
 # Ansible retry files
 *.retry

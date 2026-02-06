@@ -21,6 +21,12 @@
     port: '443'
     proto: tcp
 
+- name : Allow HTTP traffic
+  community.general.ufw:
+    rule: allow
+    port: '80'
+    proto: tcp
+
 - name: Enable UFW and set default deny policy
   community.general.ufw:
     state: enabled
